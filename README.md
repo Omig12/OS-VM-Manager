@@ -23,6 +23,4 @@ Important:
 
 # python wsclock.py <Number of physical memory pages> <access sequence file>
 
-============================================================================# OS-VM-Manager
-# OS-VM-Manager
-# OS-VM-Manager
+============================================================================
