@@ -11,16 +11,16 @@ Important:
 ============================================================================
 ## Optimal Replacement
 
-# python optimal.py <Number of physical memory pages> <access sequence file>
+$ python optimal.py <Number of physical memory pages> <access sequence file>
 
 ============================================================================
 ## Second Chance 
 
-# python second.py <Number of physical memory pages> <access sequence file>
+$ python second.py <Number of physical memory pages> <access sequence file>
 
 ============================================================================
 ## Working Set Clock
 
-# python wsclock.py <Number of physical memory pages> <access sequence file>
+$ python wsclock.py <Number of physical memory pages> <access sequence file>
 
 ============================================================================
