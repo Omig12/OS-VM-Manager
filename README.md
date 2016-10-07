@@ -3,19 +3,16 @@
 ### 801-11-2035
 
 What is OS_VM_Manager?
-======================
+______________________
 
 It is a set of python code that aims to simulate the workings of an operating systems 
 Memory Manager. It presents the changes that happen when updating a simple 
 representation of a page table and have to swap out different pages. This is done 
 implementing diferent algorithms, such as:
-  + First In First Out Replacement
-  + Optimal Replacement
-  + Sencond Chance Replacement
-  + Working Set Clock Replacement
-
-
-
+  + #First In First Out Replacement
+  + #Optimal Replacement
+  + #Sencond Chance Replacement
+  + #Working Set Clock Replacement
 
 Important:
 ----------
@@ -26,7 +23,7 @@ Te notation for all input files is as follows:
 `R:1 R:3 W:2 R:2 R:1 ...`
 
 ## First In First Out Replacement
-----------------------------------------------------------------
+----------------------------------------------------------------------------
 
 The first in first out replacement algorithm works by first replacing the 
 oldest page within the table and then moving up to the second oldest and so 
@@ -48,19 +45,21 @@ Page Hits: 6
 ```
 
 ## Optimal Replacement
-----------------------------------------------------------------
+----------------------------------------------------------------------------
 
 The optimal replacement algorithm works by replace the page with fewer 
 references first and the moving up from least referenced to most referenced.
 
 **_To run:_**
-`$ python optimal.py <Number of physical memory pages> <access sequence file>`
+```sh 
+$ python optimal.py <Number of physical memory pages> <access sequence file>
+```
 
 **_Example:_**
 ```python
 R:1 W:1 W:2 R:3 R:1 R:4 W:5 R:2 R:2 R:2 W:2 W:3 R:2
 
-{ID:# of times references}
+{Page ID: "# of times references"}
 Reference Table: {1:3, 2:6, 3:2, 4:1, 5:1}
 
 Page table: [4,2,5]
@@ -69,15 +68,20 @@ Page Faults: 6
 Page Hits: 7
 ```
 
-
 ## Second Chance 
-----------------------------------------------------------------
+----------------------------------------------------------------------------
 
 **_To run:_**
-`$ python second.py <Number of physical memory pages> <access sequence file>`
+```sh
+$ python second.py <Number of physical memory pages> <access sequence file>
+```
 
 ## Working Set Clock
-----------------------------------------------------------------
+----------------------------------------------------------------------------
 
 **_To run:_**
-`$ python wsclock.py <Number of physical memory pages> <access sequence file>`
+```sh
+$ python wsclock.py <Number of physical memory pages> <access sequence file>
+```
+
+=============================================================================
