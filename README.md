@@ -26,36 +26,38 @@ Te notation for all input files is as follows:
 `R:1 R:3 W:2 R:2 R:1 ...`
 
 ## First In First Out Replacement
-============================================================================
+----------------------------------------------------------------
 
 The first in first out replacement algorithm works by first replacing the 
 oldest page within the table and then moving up to the second oldest and so 
 forth.
 
-**_To run:_** 
-`$ python fifo.py <Number of physical memory pages> <access sequence file>`
+**_To run:_**
+```sh 
+$ python fifo.py <Number of physical memory pages> <access sequence file>
+```
 
 **_Example:_**
-`
+```python
 R:1 W:1 W:2 R:3 R:1 R:4 W:5 R:2 R:2 R:2 W:2 W:3 R:2
 
 Page Table: [5,4,2]
 Table size: 3
 page Faults: 7
 Page Hits: 6
-`
+```
 
 ## Optimal Replacement
-============================================================================
+----------------------------------------------------------------
 
 The optimal replacement algorithm works by replace the page with fewer 
 references first and the moving up from least referenced to most referenced.
 
-#####To run: 
+**_To run:_**
 `$ python optimal.py <Number of physical memory pages> <access sequence file>`
 
-#####Example:
-`
+**_Example:_**
+```python
 R:1 W:1 W:2 R:3 R:1 R:4 W:5 R:2 R:2 R:2 W:2 W:3 R:2
 
 {ID:# of times references}
@@ -65,17 +67,17 @@ Page table: [4,2,5]
 Table size: 3
 Page Faults: 6
 Page Hits: 7
-`
+```
 
 
 ## Second Chance 
-============================================================================
+----------------------------------------------------------------
 
-#####To run:
+**_To run:_**
 `$ python second.py <Number of physical memory pages> <access sequence file>`
 
 ## Working Set Clock
-============================================================================
+----------------------------------------------------------------
 
-#####To run:
+**_To run:_**
 `$ python wsclock.py <Number of physical memory pages> <access sequence file>`
