@@ -1,13 +1,12 @@
  # Israel O. Dilan Pantojas
  # 801-11-2035
- # OSecond Chance Replacement
+ # Optimal Replacement
 
 import sys
 import string
-
 # Notation R:5 (Read Page 5), w:5 (Write Page 5)
 
-# python second.py <Number of physical memory pages> <access sequence file>
+# python optimal.py <Number of physical memory pages> <access sequence file>
 
 NPMP = int(sys.argv[1])
 ASF  = sys.argv[2]

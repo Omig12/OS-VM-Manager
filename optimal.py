@@ -12,7 +12,8 @@ NPMP = int(sys.argv[1])
 ASF  = sys.argv[2]
 pages = []
 referenced = {}
-
+order = []
+pos = 0
 
 f = open(ASF,'r')
 
@@ -24,15 +25,42 @@ jobs = jobs.split(" ")
 # print NPMP
 
 for i in jobs:
-	if (len(pages) < NPMP):
-		pages.append(i.split(":")[1])
-		print "Page Fault", pages
-	if i not in referenced:
+	if i.split(":")[1] in referenced: 
 		referenced[i.split(":")[1]] += 1
 	else:
-		for x in range(len(pages)):
-			if (x < len(pages)-1):
-				pages[int(x)] = pages[int(x)+1]
-			else:
-				pages[len(pages)-1] = i.split(":")[1]
-		print pages
+		referenced[i.split(":")[1]] = 1
+
+# print referenced
+
+for i in referenced.keys():
+	order.append((int(i) , referenced[i]))
+
+for m in order:
+	for i in range(len(order)-1):
+		if (order[i][1] > order[i+1][1]): 
+			swap = order[i+1]
+			order[i+1] = order[i]
+			order[i] = swap
+
+# print order
+
+for i in jobs:
+	value = i.split(":")[1]
+	if (len(pages) < NPMP):
+		if ( value in pages):
+			print "Page Hit"
+		else:
+			pages.append(value)
+			print "Page Fault", pages
+	else:
+		if value in pages:
+			print "Page Hit  ", pages
+		else:
+			print "Order Map:", order
+			for x in order:
+				if (str(x[0]) in pages): 
+					pos = pages.index(str(x[0]))
+					order.remove(x)
+					break
+			pages[pos] = value
+			print "Page Fault", pages

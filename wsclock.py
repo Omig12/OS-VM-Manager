@@ -3,16 +3,16 @@
  # Working set clock Replacement
 
 import sys
+import string
 
 # Notation R:5 (Read Page 5), w:5 (Write Page 5)
 
 # python wsclock.py <Number of physical memory pages> <access sequence file>
 
-NPMP = sys.argv[1]
+NPMP = int(sys.argv[1])
 ASF  = sys.argv[2]
-sclock = 0
 pages = []
-
+pos = 0
 
 f = open(ASF,'r')
 
@@ -25,12 +25,20 @@ jobs = jobs.split(" ")
 
 for i in jobs:
 	if (len(pages) < NPMP):
-		pages.append(i.split(":")[1])
-		print "Page Fault", pages
+		if (i.split(":")[1] in pages):
+			print "Page Hit"
+		else:
+			pages.append(i.split(":")[1])
+			print "Page Fault", pages
 	else:
-		for x in range(len(pages)):
-			if (x < len(pages)-1):
-				pages[int(x)] = pages[int(x)+1]
+		if i.split(":")[1] in pages:
+			print "Page Hit"
+		else:
+			print "Page Fault" 
+			if (pos < len(pages)-1):
+				pages[pos] = i.split(":")[1]
+				pos += 1
 			else:
-				pages[len(pages)-1] = i.split(":")[1]
+				pages[pos] = i.split(":")[1]
+				pos = 0
 		print pages
