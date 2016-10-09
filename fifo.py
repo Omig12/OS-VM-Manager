@@ -1,6 +1,6 @@
  # Israel O. Dilan Pantojas
  # 801-11-2035
- # Optimal Replacement
+ # First in First Out Replacement
 
 import sys
 import string
@@ -18,6 +18,7 @@ f = open(ASF,'r')
 jobs = f.read()
 jobs = jobs.strip()
 jobs = jobs.split(" ")
+f.close()
 
 # print jobs
 # print NPMP

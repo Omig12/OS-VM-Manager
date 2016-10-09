@@ -1,6 +1,6 @@
  # Israel O. Dilan Pantojas
  # 801-11-2035
- # OSecond Chance Replacement
+ # Second Chance Replacement
 
 import sys
 import string
@@ -11,34 +11,49 @@ import string
 
 NPMP = int(sys.argv[1])
 ASF  = sys.argv[2]
-pages = []
 pos = 0
+pages = []
+
 
 f = open(ASF,'r')
 
 jobs = f.read()
 jobs = jobs.strip()
 jobs = jobs.split(" ")
+f.close()
 
 # print jobs
 # print NPMP
 
+
 for i in jobs:
-	if (len(pages) < NPMP):
-		if (i.split(":")[1] in pages):
-			print "Page Hit"
-		else:
-			pages.append(i.split(":")[1])
-			print "Page Fault", pages
-	else:
-		if i.split(":")[1] in pages:
-			print "Page Hit"
-		else:
-			print "Page Fault" 
-			if (pos < len(pages)-1):
-				pages[pos] = i.split(":")[1]
-				pos += 1
+	value = i.split(":")[1]
+	if (len(pages) == 0):
+		pages.append((value, 0))
+		print "Page Fault", pages
+	elif (len(pages) < NPMP):
+		for x in pages:
+			if (value == str(x[0])):
+				tmp = pages.index(x)
+				pages[tmp] = (str(x[0]), 1) 
+				print "Page Hit"
 			else:
-				pages[pos] = i.split(":")[1]
+				pages.append((value, 0))
+				print "Page Fault", pages
+	else:
+		for x in pages:
+			if (pos < len(pages)-1):
+				if (str(value) == str(x[0])):
+					tmp = pages.index(x)
+				 	pages[tmp] = (str(x[0]), 1)  
+					print "Page Hit"
+					pos += 1
+			else:
+				if (str(value) == str(x[0])):
+					tmp = pages.index(x)
+				 	pages[tmp] = (str(x[0]), 1)  
+					print "Page Hit"
+				else:
+					pages[pos] = (value, 0)
 				pos = 0
-		print pages
+			print "Page Fault", pages

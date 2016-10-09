@@ -9,10 +9,10 @@ It is a set of python code that aims to simulate the workings of an operating sy
 Memory Manager. It presents the changes that happen when updating a simple 
 representation of a page table and have to swap out different pages. This is done 
 implementing diferent algorithms, such as:
-  + #First In First Out Replacement
-  + #Optimal Replacement
-  + #Sencond Chance Replacement
-  + #Working Set Clock Replacement
+  	#### First In First Out Replacement
+  	#### Optimal Replacement
+  	#### Sencond Chance Replacement
+	#### Working Set Clock Replacement
 
 Important:
 ----------

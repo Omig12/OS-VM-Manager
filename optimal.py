@@ -20,6 +20,7 @@ f = open(ASF,'r')
 jobs = f.read()
 jobs = jobs.strip()
 jobs = jobs.split(" ")
+f.close()
 
 # print jobs
 # print NPMP
@@ -56,9 +57,11 @@ for i in jobs:
 		if value in pages:
 			print "Page Hit  ", pages
 		else:
-			print "Order Map:", order
+			# print "Order Map:", order
 			for x in order:
-				if (str(x[0]) in pages): 
+				if (str(x[0]) in pages):
+					# print "Remove Page: {}".format(x[0])
+					# print "Insert Page: {}".format(value)
 					pos = pages.index(str(x[0]))
 					order.remove(x)
 					break
