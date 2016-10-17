@@ -9,14 +9,13 @@ It is a set of python code that aims to simulate the workings of an operating sy
 Memory Manager. It presents the changes that happen when updating a simple 
 representation of a page table and have to swap out different pages. This is done 
 implementing diferent algorithms, such as:
-  	#### First In First Out Replacement
-  	#### Optimal Replacement
-  	#### Sencond Chance Replacement
-	#### Working Set Clock Replacement
++ *First In First Out Replacement*
++ *Optimal Replacement*
++ *Sencond Chance Replacement*
++ *Working Set Clock Replacement*
 
 Important:
 ----------
-
 Te notation for all input files is as follows:
 > Notation R:5 (Read Page 5), w:5 (Write Page 5)
 
@@ -37,18 +36,17 @@ $ python fifo.py <Number of physical memory pages> <access sequence file>
 **_Example:_**
 ```python
 R:1 W:1 W:2 R:3 R:1 R:4 W:5 R:2 R:2 R:2 W:2 W:3 R:2
-
 Page Table: [5,4,2]
 Table size: 3
-page Faults: 7
+Page Faults: 7
 Page Hits: 6
 ```
-
 ## Optimal Replacement
 ----------------------------------------------------------------------------
 
-The optimal replacement algorithm works by replace the page with fewer 
-references first and the moving up from least referenced to most referenced.
+The optimal replacement algorithm works by replacing the page that will be  
+references again the latest from all al the pages currently in the table look
+aside buffer.
 
 **_To run:_**
 ```sh 
@@ -59,10 +57,7 @@ $ python optimal.py <Number of physical memory pages> <access sequence file>
 ```python
 R:1 W:1 W:2 R:3 R:1 R:4 W:5 R:2 R:2 R:2 W:2 W:3 R:2
 
-{Page ID: "# of times references"}
-Reference Table: {1:3, 2:6, 3:2, 4:1, 5:1}
-
-Page table: [4,2,5]
+Page table: [3,2,5]
 Table size: 3
 Page Faults: 6
 Page Hits: 7
@@ -70,6 +65,11 @@ Page Hits: 7
 
 ## Second Chance 
 ----------------------------------------------------------------------------
+
+The second chance replacement algorithm basically works like the fifo 
+algorithm the only difference being that it gives each page that is going to 
+be removed a second chance to join the queue if it was marked as referenced
+when it was removed.  
 
 **_To run:_**
 ```sh
@@ -85,3 +85,9 @@ $ python wsclock.py <Number of physical memory pages> <access sequence file>
 ```
 
 =============================================================================
+
+## Discussed with:
++ Jeffrey A. Chan
++ Alejandro S. Vega
++ Omar Cruz Pantoja
++ Juan Lugo Torres

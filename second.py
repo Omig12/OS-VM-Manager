@@ -9,11 +9,13 @@ import string
 
 # python second.py <Number of physical memory pages> <access sequence file>
 
-NPMP = int(sys.argv[1])
-ASF  = sys.argv[2]
+NPMP = int(sys.argv[1]) # Ammount of page frames
+ASF  = sys.argv[2]      # Access sequence file "ej: input.txt"
+pages = []				# Page table
+referenced = {}         # Order access 
+pf = 0					# Page fault counter
+ph = 0					# Page hit counter
 pos = 0
-pages = []
-
 
 f = open(ASF,'r')
 
@@ -26,34 +28,64 @@ f.close()
 # print NPMP
 
 
+# State A1: Physical memory pages < MaxSize
+	# Fill array with items/page faults 
+# State A2: Physical memory pages = MaxSize
+	# Move to B states
+
+# State B1: Looking at first page
+# State B2: If not referenced evict
+# State B3: If referenced, unreference and move to the back 
+
+
+# For each page job
 for i in jobs:
 	value = i.split(":")[1]
-	if (len(pages) == 0):
-		pages.append((value, 0))
-		print "Page Fault", pages
-	elif (len(pages) < NPMP):
-		for x in pages:
-			if (value == str(x[0])):
-				tmp = pages.index(x)
-				pages[tmp] = (str(x[0]), 1) 
-				print "Page Hit"
+	
+	# If TLB not full 
+	if (len(pages) < NPMP):
+	
+			# If page already in TLB
+			if value in pages:
+				referenced[value] = 1
+				print "Page Hit  ", pages
+				ph += 1
+
+			# If page not in TLB
 			else:
-				pages.append((value, 0))
+				pages.append(value)
+				referenced[value] = 1
 				print "Page Fault", pages
+				pf += 1
+	
+	#If TLB full
 	else:
-		for x in pages:
-			if (pos < len(pages)-1):
-				if (str(value) == str(x[0])):
-					tmp = pages.index(x)
-				 	pages[tmp] = (str(x[0]), 1)  
-					print "Page Hit"
-					pos += 1
-			else:
-				if (str(value) == str(x[0])):
-					tmp = pages.index(x)
-				 	pages[tmp] = (str(x[0]), 1)  
-					print "Page Hit"
+
+		# If page already in TLB
+		if value in pages:
+				referenced[value] = 1
+				print "Page Hit  ", pages
+				ph += 1
+		
+		# If page not in TLB
+		else:
+			flag = 0
+			while (flag == 0):
+				# Move through positions in table 
+				if (pos < len(pages)):
+					# Evict non referenced page
+					if (referenced[pages[pos]] == 0):
+						pages[pos] = value
+						referenced[value] = 1
+						print "Page Fault", pages
+						pf += 1
+						pos += 1
+						flag += 1
+					else:
+						referenced[pages[pos]] = 0
+						pos += 1
 				else:
-					pages[pos] = (value, 0)
-				pos = 0
-			print "Page Fault", pages
+					pos = 0				
+
+print "The total ammount of page faults was: {}".format(pf)
+print "The total ammount of page hits was: {}".format(ph)

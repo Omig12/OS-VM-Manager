@@ -7,12 +7,20 @@ import string
 
 # Notation R:5 (Read Page 5), w:5 (Write Page 5)
 
-# python wsclock.py <Number of physical memory pages> <access sequence file>
+# python wsclock.py <Number of physical memory pages> <tau> <access sequence file>
 
 NPMP = int(sys.argv[1])
-ASF  = sys.argv[2]
+TAU  = sys.argv[2]
+ASF  = sys.argv[3]
 pages = []
 pos = 0
+
+class pageClass:
+	"""Page Class"""
+	def __init__(self, dir, ref, ) :
+		self.dir = dir
+		self.ref = ref
+		self.mod = mod
 
 f = open(ASF,'r')
 jobs = f.read()
@@ -30,15 +38,8 @@ for i in jobs:
 		else:
 			pages.append(i.split(":")[1])
 			print "Page Fault", pages
-	else:
-		if i.split(":")[1] in pages:
-			print "Page Hit"
-		else:
-			print "Page Fault" 
-			if (pos < len(pages)-1):
-				pages[pos] = i.split(":")[1]
-				pos += 1
-			else:
-				pages[pos] = i.split(":")[1]
-				pos = 0
-		print pages
+	else: 
+
+
+print "The total ammount of page faults was: {}".format(pf)
+print "The total ammount of page hits was: {}".format(ph)
