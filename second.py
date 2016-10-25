@@ -12,7 +12,7 @@ import string
 NPMP = int(sys.argv[1]) # Ammount of page frames
 ASF  = sys.argv[2]      # Access sequence file "ej: input.txt"
 pages = []				# Page table
-referenced = {}         # Order access 
+referenced = {}         # Referenced bit 
 pf = 0					# Page fault counter
 ph = 0					# Page hit counter
 pos = 0
@@ -29,58 +29,63 @@ f.close()
 
 
 # State A1: Physical memory pages < MaxSize
-	# Fill array with items/page faults 
+	# Fill array with items 
 # State A2: Physical memory pages = MaxSize
 	# Move to B states
 
-# State B1: Looking at first page
-# State B2: If not referenced evict
-# State B3: If referenced, unreference and move to the back 
+# State B1: If not referenced evict
+# State B2: If referenced, unreference and move to the back 
 
 
 # For each page job
 for i in jobs:
 	value = i.split(":")[1]
-	
-	# If TLB not full 
+
+	# State A1	
+	# If page table not full 
 	if (len(pages) < NPMP):
 	
-			# If page already in TLB
+			# If page already in Page Table
 			if value in pages:
 				referenced[value] = 1
 				print "Page Hit  ", pages
 				ph += 1
 
-			# If page not in TLB
+			# If page not in Page Table
 			else:
 				pages.append(value)
-				referenced[value] = 1
+				referenced[value] = 0
 				print "Page Fault", pages
 				pf += 1
 	
-	#If TLB full
+	# State A2	
+	#If Page Table full
 	else:
 
-		# If page already in TLB
+		# If page already in Page Table
 		if value in pages:
 				referenced[value] = 1
 				print "Page Hit  ", pages
 				ph += 1
 		
-		# If page not in TLB
+		# B States
+		# If page not in Page Table
 		else:
 			flag = 0
 			while (flag == 0):
+
 				# Move through positions in table 
 				if (pos < len(pages)):
+					# State B2
 					# Evict non referenced page
 					if (referenced[pages[pos]] == 0):
 						pages[pos] = value
-						referenced[value] = 1
+						referenced[value] = 0
 						print "Page Fault", pages
 						pf += 1
 						pos += 1
 						flag += 1
+					# State B3
 					else:
 						referenced[pages[pos]] = 0
 						pos += 1

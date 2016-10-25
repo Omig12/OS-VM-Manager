@@ -79,9 +79,15 @@ $ python second.py <Number of physical memory pages> <access sequence file>
 ## Working Set Clock
 ----------------------------------------------------------------------------
 
+The working set clock algorithm prioratizes time efficiency by keeping track
+which pages have been present in the table longer than their working set, 
+which pages have been referenced and which pages have been written to or 
+modified. Following this three critireon the algorithm can hopefully evict a
+less needed (not referenced), clean (not modified) and old page (largest time).
+
 **_To run:_**
 ```sh
-$ python wsclock.py <Number of physical memory pages> <access sequence file>
+$ python wsclock.py <Number of physical memory pages> <tau> <access sequence file>
 ```
 
 =============================================================================
